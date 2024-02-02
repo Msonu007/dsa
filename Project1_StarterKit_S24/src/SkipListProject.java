@@ -44,7 +44,6 @@ public class SkipListProject {
         
     	// the file containing the commands
         File file = null;
-
         
 
         // Attempts to open the file and scan through it
@@ -77,6 +76,5 @@ public class SkipListProject {
             System.out.println("Invalid file");
             e.printStackTrace();
         }
-
-    }
+        }
 }

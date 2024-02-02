@@ -50,7 +50,10 @@ public class CommandProcessor {
         // parameters by converting the string integers into
         // their Integer equivalent, trimming the whitespace
         if (command.equals("insert")) {
-            //Calls insert
+            String rectName = arr[1];
+            Rectangle rect = new Rectangle(Integer.parseInt(arr[2]),Integer.parseInt(arr[3]),Integer.parseInt(arr[4]),Integer.parseInt(arr[5]));
+            KVPair<String,Rectangle> val = new KVPair<String,Rectangle>(rectName,rect);
+            data.insert(val);
         }
         // calls the appropriate remove method based on the
         // number of white space delimited strings in the line
@@ -58,8 +61,7 @@ public class CommandProcessor {
             // checks the number of white space delimited strings in the line
             int numParam = arr.length - 1;
             if (numParam == 1) {
-                // Calls remove by name
-                
+                data.remove(arr[1]);
             }
             else if (numParam == 4) {
                 // Calls remove by coordinate, converting string
@@ -80,9 +82,11 @@ public class CommandProcessor {
         }
         else if (command.equals("search")) {
              // calls the search method for a name of object
+            data.search(arr[1]);
            
         }
         else if (command.equals("dump")) {
+            data.dump();
             // calls the dump method for the database, takes no parameters
             // (see the dump() JavaDoc in the Database class for more information)
 
