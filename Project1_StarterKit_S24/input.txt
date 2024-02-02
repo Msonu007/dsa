@@ -6,13 +6,25 @@ insert virtual_REC0 0 0 11 0
 insert inExistRec_0 1 1 -1 -2
 insert r1 10 10 5 5
 insert r2 15 15 5 5
-insert r2 15 15 5 6
 insert r3 7 7 10 10
 insert r4 20 25 7 9
+insert r2 15 15 5 6
 insert r4 20 12 3 3
 insert r5 6 7 11 9
 search r2
 dump
 remove r2
 dump
-
+remove 7 7 10 10
+dump
+remove res
+dump
+remove r1
+dump
+remove r5
+dump
+remove r4
+remove r4
+dump
+remove r3
+dump

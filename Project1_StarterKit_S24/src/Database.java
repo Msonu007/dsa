@@ -53,15 +53,12 @@ public class Database {
         // Delegates the decision mostly to SkipList, only
         // writing the correct message to the console from
         // that
-        int x_ = pair.getValue().getxCoordinate();
-        int y_ = pair.getValue().getyCoordinate();
-        int h = pair.getValue().getHeight();
-        int w = pair.getValue().getWidth();
-        if( x_>= 0 &&  y_>=0 && y_+h<=1024 && x_+w<=1024 && h>0 && w>0) {
+        Rectangle rect = pair.getValue();
+        if(! rect.isInvalid()) {
             list.insert(pair);
             System.out.printf("Rectangle Inserted: (%s, %d, %d, %d, %d) \n", pair.getKey().toString(),pair.getValue().getxCoordinate(),pair.getValue().getyCoordinate(),pair.getValue().getWidth(),pair.getValue().getHeight());
         }else {
-            System.out.printf("Rectangle Rejected: (%s, %d, %d, %d, %d) \n ", pair.getKey().toString(),pair.getValue().getxCoordinate(),pair.getValue().getyCoordinate(),pair.getValue().getWidth(),pair.getValue().getHeight());
+            System.out.printf("Rectangle Rejected: (%s, %d, %d, %d, %d) \n", pair.getKey().toString(),pair.getValue().getxCoordinate(),pair.getValue().getyCoordinate(),pair.getValue().getWidth(),pair.getValue().getHeight());
         }
 
     }
@@ -101,7 +98,15 @@ public class Database {
      *            height of the rectangle to be removed
      */
     public void remove(int x, int y, int w, int h) {
-     
+        KVPair<String,Rectangle> ans;
+        Rectangle rec = new Rectangle(x,y,w,h);
+        ans = list.removeByValue(rec);
+        if (ans != null) {
+            System.out.printf("Rectangle removed: (%s,%d,%d,%d,%d) \n",ans.getKey().toString(),ans.getValue().getxCoordinate(),ans.getValue().getyCoordinate(),ans.getValue().getWidth(),ans.getValue().getWidth());
+        }else {
+            System.out.printf("Rectangle not removed (%d,%d,%d,%d) \n",x,y,w,h);
+        }
+        
     }
 
 

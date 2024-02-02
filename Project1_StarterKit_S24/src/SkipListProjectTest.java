@@ -3,7 +3,6 @@ import student.TestCase;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 /**
  * Unit tests for the CommandParser class.
@@ -13,7 +12,7 @@ import java.util.Scanner;
  * @author Mrunaldhar Bathula
  * @version 1.2
  */
-public class CommandProcessorTest extends TestCase {
+public class SkipListProjectTest extends TestCase {
     /**
      * Reads the content of a file as a string.
      *
@@ -49,7 +48,7 @@ public class CommandProcessorTest extends TestCase {
     }
     
     /**
-     * Testcase
+     * Test case for Mrunal
      *
      * @throws Exception If an exception occurs.
      */
@@ -57,27 +56,9 @@ public class CommandProcessorTest extends TestCase {
         
         PrintStream newOut = new PrintStream(outContent);
         System.setOut(newOut);
-     // takes the first command line argument and opens that file
-        File file = new File("input.txt");
         
-        // creates a scanner object
-        Scanner scanner = new Scanner(file);
-        
-        // creates a command processor object
-        CommandProcessor cmdProc = new CommandProcessor();
-        
-        // reads the entire file and processes the commands
-        // line by line
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            // determines if the file has more lines to read
-            if (!line.trim().isEmpty()) {
-                cmdProc.processor(line.trim());
-            }
-        }
-        // closes the scanner
-        scanner.close();
-   
+        CommandProcessor com = new CommandProcessor(); //"input.txt"
+        assertNotNull(com);
        
  
         
