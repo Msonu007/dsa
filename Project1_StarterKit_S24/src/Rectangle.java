@@ -133,9 +133,6 @@ public class Rectangle {
         int y_ = this.yCoordinate;
         int h = this.height;
         int w = this.width;
-        if( x_>= 0 &&  y_>=0 && y_+h<=1024 && x_+w<=1024 && h>0 && w>0) {
-            return false;
-        }
-        return true;
+        return  x_>= 0 &&  y_>=0 && y_+h<=1024 && x_+w<=1024 && h>0 && w>0;
     }
 }

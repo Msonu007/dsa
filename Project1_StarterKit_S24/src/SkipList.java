@@ -132,8 +132,6 @@ public class SkipList<K extends Comparable<? super K>, V>
             newNode.forward[level] = next;
         }
         this.size += 1;
-
-        System.out.println("\n \n");
     }
 
 
@@ -291,9 +289,9 @@ public class SkipList<K extends Comparable<? super K>, V>
          * SkipList size is: 0
          */
 
-        System.out.println("SkipList dump:");
+        //System.out.println("SkipList dump:");
         SkipNode temp = this.head;
-        System.out.printf("Node has depth %d, Value null \n", this.head.level);
+        //System.out.printf("Node has depth %d, Value null \n", this.head.level);
         temp = temp.forward[0];
         while (temp != null) {
             if (temp.pair.getValue() instanceof Rectangle) {
