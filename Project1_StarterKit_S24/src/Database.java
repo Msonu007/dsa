@@ -56,9 +56,9 @@ public class Database {
         Rectangle rect = pair.getValue();
         if(! rect.isInvalid()) {
             list.insert(pair);
-            System.out.printf("Rectangle Inserted: (%s, %d, %d, %d, %d) \n", pair.getKey().toString(),pair.getValue().getxCoordinate(),pair.getValue().getyCoordinate(),pair.getValue().getWidth(),pair.getValue().getHeight());
+            System.out.printf("Rectangle Inserted: (%s, %d, %d, %d, %d)\n", pair.getKey().toString(),pair.getValue().getxCoordinate(),pair.getValue().getyCoordinate(),pair.getValue().getWidth(),pair.getValue().getHeight());
         }else {
-            System.out.printf("Rectangle Rejected: (%s, %d, %d, %d, %d) \n", pair.getKey().toString(),pair.getValue().getxCoordinate(),pair.getValue().getyCoordinate(),pair.getValue().getWidth(),pair.getValue().getHeight());
+            System.out.printf("Rectangle Rejected: (%s, %d, %d, %d, %d)\n", pair.getKey().toString(),pair.getValue().getxCoordinate(),pair.getValue().getyCoordinate(),pair.getValue().getWidth(),pair.getValue().getHeight());
         }
 
     }
@@ -75,9 +75,9 @@ public class Database {
         KVPair<String,Rectangle> ans;
         ans = list.remove(name);
         if (ans != null) {
-            System.out.printf("Rectangle removed: (%s,%d,%d,%d,%d) \n",ans.getKey().toString(),ans.getValue().getxCoordinate(),ans.getValue().getyCoordinate(),ans.getValue().getWidth(),ans.getValue().getWidth());
+            System.out.printf("Rectangle removed: (%s,%d,%d,%d,%d)\n",ans.getKey().toString(),ans.getValue().getxCoordinate(),ans.getValue().getyCoordinate(),ans.getValue().getWidth(),ans.getValue().getWidth());
         }else {
-            System.out.printf("Rectangle not removed %s \n",name);
+            System.out.printf("Rectangle not removed %s\n",name);
         }
         
 
@@ -102,9 +102,9 @@ public class Database {
         Rectangle rec = new Rectangle(x,y,w,h);
         ans = list.removeByValue(rec);
         if (ans != null) {
-            System.out.printf("Rectangle removed: (%s,%d,%d,%d,%d) \n",ans.getKey().toString(),ans.getValue().getxCoordinate(),ans.getValue().getyCoordinate(),ans.getValue().getWidth(),ans.getValue().getWidth());
+            System.out.printf("Rectangle removed: (%s,%d,%d,%d,%d)\n",ans.getKey().toString(),ans.getValue().getxCoordinate(),ans.getValue().getyCoordinate(),ans.getValue().getWidth(),ans.getValue().getWidth());
         }else {
-            System.out.printf("Rectangle not removed (%d,%d,%d,%d) \n",x,y,w,h);
+            System.out.printf("Rectangle not removed (%d,%d,%d,%d)\n",x,y,w,h);
         }
         
     }

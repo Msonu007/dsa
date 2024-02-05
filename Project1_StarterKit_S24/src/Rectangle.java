@@ -99,16 +99,13 @@ public class Rectangle {
      *         not
      */
     public boolean equals(Object rec) {
-        Rectangle temp;
-        if (rec instanceof Rectangle) {
-            temp = (Rectangle) rec;
-            if(this.xCoordinate == temp.getxCoordinate() && this.yCoordinate == temp.getyCoordinate() && this.height == temp.getHeight() && this.width == temp.getWidth()) {
-                return true;
-            }
+
+        // Check for null and ensure exact type match if strict equality is needed
+        if (rec == null || this.getClass() != rec.getClass()) {
+            return false;
         }
-        
-        return false;
-    }
+        return this.xCoordinate == ((Rectangle)rec).getxCoordinate() && this.yCoordinate == ((Rectangle)rec).getyCoordinate() && this.height == ((Rectangle)rec).getHeight() && this.width == ((Rectangle)rec).getWidth();
+        }
 
 
     /**
@@ -129,10 +126,7 @@ public class Rectangle {
      * @return true if the rectangle has invalid parameters, false if not
      */
     public boolean isInvalid() {
-        int x_ = this.xCoordinate;
-        int y_ = this.yCoordinate;
-        int h = this.height;
-        int w = this.width;
-        return  x_>= 0 &&  y_>=0 && y_+h<=1024 && x_+w<=1024 && h>0 && w>0;
+        boolean s = !(this.xCoordinate>= 0 &&  this.yCoordinate>=0 && this.yCoordinate+this.height<=1024 && this.xCoordinate+this.width<=1024 && this.height>0 && this.width>0);
+        return s; 
     }
 }

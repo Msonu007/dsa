@@ -238,7 +238,7 @@ public class SkipList<K extends Comparable<? super K>, V>
                         break;
                     }
                     else {
-                        if (temp.forward[i] == ele) {
+                        if (temp.forward[i].equals(ele)) {
                             TempList[i] = temp;
                             break;
                         }
@@ -272,41 +272,35 @@ public class SkipList<K extends Comparable<? super K>, V>
      * Prints out the SkipList in a human readable format to the console.
      */
     public void dump() {
-        /*
-         * dump
-         * 
-         * #if skiplist has nodes:
-         * SkipList dump:
-         * Node has depth 3, Value null #header node
-         * Node has depth 3, Value (a, 1, 0, 2, 4)
-         * Node has depth 2, Value (b, 2, 0, 4, 8)
-         * SkipList size is: 2
-         * 
-         * #if skiplist has no nodes:
-         * 
-         * SkipList dump:
-         * Node has depth 1, Value null #header node
-         * SkipList size is: 0
-         */
+        System.out.println("SkipList dump:");
 
-        //System.out.println("SkipList dump:");
-        SkipNode temp = this.head;
-        //System.out.printf("Node has depth %d, Value null \n", this.head.level);
-        temp = temp.forward[0];
+        // Print the header node's level
+        System.out.printf("Node has depth %d, Value null\n", this.head.level);
+
+        // Iterate through the SkipList
+        SkipNode temp = this.head.forward[0]; // Start with the node after the header
         while (temp != null) {
+            // Print node details. Special handling for Rectangle values.
             if (temp.pair.getValue() instanceof Rectangle) {
-                Rectangle tempRectangle = (Rectangle)temp.pair.getValue();
-                System.out.printf(
-                    "Node has depth %d, Value (%s, %d, %d, %d, %d ) \n", temp
-                        .getLevel(), temp.pair.getKey().toString(),
-                    tempRectangle.getxCoordinate(), tempRectangle
-                        .getyCoordinate(), tempRectangle.getWidth(),
-                    tempRectangle.getHeight());
+                Rectangle tempRectangle = (Rectangle) temp.pair.getValue();
+                System.out.printf("Node has depth %d, Value (%s, %d, %d, %d, %d)\n",
+                                  temp.getLevel(),
+                                  temp.pair.getKey().toString(),
+                                  tempRectangle.getxCoordinate(),
+                                  tempRectangle.getyCoordinate(),
+                                  tempRectangle.getWidth(),
+                                  tempRectangle.getHeight());
+            } else {
+                // Generic print format for non-Rectangle values
+                System.out.printf("Node has depth %d, Value (%s)\n",
+                                  temp.getLevel(),
+                                  temp.pair.toString());
             }
-            temp = temp.forward[0];
+            temp = temp.forward[0]; // Move to the next node
         }
-        System.out.printf("SkipList size is: %d \n", this.size);
 
+        // Print the size of the SkipList
+        System.out.printf("SkipList size is: %d\n", this.size);
     }
 
     /**

@@ -41,63 +41,68 @@ public class CommandProcessor {
      *            a single line from the text file
      */
     public void processor(String line) {
-        // converts the string of the line into an
-        // array of its space (" ") delimited elements
-        String[] arr = line.split("\\s{1,}");        
-        String command = arr[0]; // the command will be the first of these
-                                 // elements
-        // calls the insert function and passes the correct
-        // parameters by converting the string integers into
-        // their Integer equivalent, trimming the whitespace
-        if (command.equals("insert")) {
-            String rectName = arr[1];
-            Rectangle rect = new Rectangle(Integer.parseInt(arr[2]),Integer.parseInt(arr[3]),Integer.parseInt(arr[4]),Integer.parseInt(arr[5]));
-            KVPair<String,Rectangle> val = new KVPair<String,Rectangle>(rectName,rect);
-            data.insert(val);
+        String[] arr = line.trim().split("\\s+"); // Use "\\s+" to split on one or more spaces
+        if (arr.length == 0) {
+            System.out.println("Empty command line.");
+            return;
         }
-        // calls the appropriate remove method based on the
-        // number of white space delimited strings in the line
-        else if (command.equals("remove")) {
-            // checks the number of white space delimited strings in the line
-            int numParam = arr.length - 1;
-            if (numParam == 1) {
-                data.remove(arr[1]);
-            }
-            else if (numParam == 4) {
-                data.remove(Integer.parseInt(arr[1]),Integer.parseInt(arr[2]),Integer.parseInt(arr[3]),Integer.parseInt(arr[4]));
-                // Calls remove by coordinate, converting string
-                // integers into their Integer equivalent minus whitespace
-                
-            }
-            
-        }
-        else if (command.equals("regionsearch")) {
-            // calls the regionsearch method for a set of coordinates
-            // the string integers in the line will be trimmed of whitespace
 
-        }
-        else if (command.equals("intersections")) {
-            // calls the intersections method, no parameters to be passed
-            // (see the intersections JavaDoc in the Database class for more information)
-           
-        }
-        else if (command.equals("search")) {
-             // calls the search method for a name of object
-            data.search(arr[1]);
-           
-        }
-        else if (command.equals("dump")) {
-            data.dump();
-            // calls the dump method for the database, takes no parameters
-            // (see the dump() JavaDoc in the Database class for more information)
-
-        }
-        else {
-                // the first white space delimited string in the line is not
-            // one of the commands which can manipulate the database,
-            // a message will be written to the console
-            System.out.println("Unrecognized command.");
+        String command = arr[0];
+        try {
+            switch (command) {
+                case "insert":
+                    // Ensure that there are enough arguments for the insert command
+                    if (arr.length == 6) {
+                        String rectName = arr[1];
+                        int x = Integer.parseInt(arr[2]);
+                        int y = Integer.parseInt(arr[3]);
+                        int width = Integer.parseInt(arr[4]);
+                        int height = Integer.parseInt(arr[5]);
+                        Rectangle rect = new Rectangle(x, y, width, height);
+                        KVPair<String, Rectangle> val = new KVPair<>(rectName, rect);
+                        data.insert(val);
+                    } else {
+                        System.out.println("Invalid number of arguments for insert.");
+                    }
+                    break;
+                case "remove":
+                    // Remove by name or by coordinates based on the number of arguments
+                    if (arr.length == 2) {
+                        data.remove(arr[1]);
+                    } else if (arr.length == 5) {
+                        int x = Integer.parseInt(arr[1]);
+                        int y = Integer.parseInt(arr[2]);
+                        int width = Integer.parseInt(arr[3]);
+                        int height = Integer.parseInt(arr[4]);
+                        data.remove(x, y, width, height);
+                    } else {
+                        System.out.println("Invalid number of arguments for remove.");
+                    }
+                    break;
+                case "regionsearch":
+                    // Implement regionsearch functionality
+                    break;
+                case "intersections":
+                    // Implement intersections functionality
+                    break;
+                case "search":
+                    if (arr.length == 2) {
+                        data.search(arr[1]);
+                    } else {
+                        System.out.println("Invalid number of arguments for search.");
+                    }
+                    break;
+                case "dump":
+                    data.dump();
+                    break;
+                default:
+                    System.out.println("Unrecognized command: " + command);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Error parsing numeric value: " + e.getMessage());
         }
     }
+
+    
 
 }
