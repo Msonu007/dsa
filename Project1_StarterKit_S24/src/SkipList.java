@@ -82,7 +82,7 @@ public class SkipList<K extends Comparable<? super K>, V>
         return size;
     }
     
-    public SkipNode<KVPair<K,V> getHead() {
+    public SkipNode getHead() {
         return this.head;
     }
 
@@ -150,11 +150,41 @@ public class SkipList<K extends Comparable<? super K>, V>
     public void adjustHead(int newLevel) {
         SkipNode[] temp1_list = (SkipNode[])Array.newInstance(
             SkipList.SkipNode.class, newLevel + 1);
-        for (int i = 0; i < head.level + 1; i++) {
-            temp1_list[i] = this.head.forward[i];
+        for (int i = 0; i < this.head.level + 1; i++) {
+            if (i<temp1_list.length) {
+                temp1_list[i] = this.head.forward[i];
+            } 
         }
         this.head.forward = temp1_list;
         this.head.level = newLevel;
+    }
+    
+    public int getHeadLevel() {
+        return this.head.level;
+    }
+    
+    public boolean isForwardValid() {
+        return this.head.forward != null;
+    }
+    
+    public int getForwardLength() {
+        return this.head.forward.length;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public ArrayList<K> iterateHead(){
+        ArrayList<K> sol = new ArrayList<K>() ;
+        SkipNode[] k = this.head.forward;
+        for (int i=0;i<k.length;i++) {
+            if(k[i] == null) {
+                sol.add((K) "a");
+            }else {
+                sol.add(k[i].pair.getKey());
+            }
+            
+        }
+        return sol;
+        
     }
 
 
@@ -180,16 +210,11 @@ public class SkipList<K extends Comparable<? super K>, V>
                 if (l.forward[i] != null && l.forward[i].pair.getKey().equals(
                     key)) {
 
-                    if (pos == null) {
+                    if (pos == null || l.forward[i] == pos) {
                         pos = l.forward[i];
                         TempList[i] = l;
                         break;
-                    }
-                    else if (l.forward[i] == pos) {
-                        TempList[i] = l;
-                        break;
-                    }
-                    else {
+                    } else {
                         l = l.forward[i];
                     }
                 }

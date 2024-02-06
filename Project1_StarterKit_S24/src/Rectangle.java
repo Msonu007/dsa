@@ -130,9 +130,10 @@ public class Rectangle {
      * @return true if the rectangle has invalid parameters, false if not
      */
     public boolean isInvalid() {
-        boolean s = !(this.xCoordinate >= 0 && this.yCoordinate >= 0
-            && this.yCoordinate + this.height <= 1024 && this.xCoordinate
-                + this.width <= 1024 && this.height > 0 && this.width > 0);
+        if (this.xCoordinate >= 1024 || this.yCoordinate >= 1024) {
+            return true;
+        }
+        boolean s = this.xCoordinate < 0 || this.yCoordinate < 0 || this.yCoordinate + this.height > 1024 || this.xCoordinate+ this.width > 1024 || this.height <= 0 || this.width <= 0;
         return s;
     }
 }

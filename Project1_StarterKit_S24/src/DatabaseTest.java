@@ -1,8 +1,9 @@
 import org.junit.*;
+import student.TestCase;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-public class DatabaseTest {
+public class DatabaseTest extends TestCase {
 
     private final ByteArrayOutputStream outContent =
         new ByteArrayOutputStream();
