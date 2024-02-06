@@ -1,5 +1,6 @@
 /**
- * The purpose of this class is to parse a single line from the command text file
+ * The purpose of this class is to parse a single line from the command text
+ * file
  * according to the format specified in the project specs.
  * 
  * @author CS Staff
@@ -29,8 +30,9 @@ public class CommandProcessor {
     /**
      * This method parses keywords in the line and calls methods in the
      * database as required. Each line command will be specified by one of the
-     * keywords to perform the actions. 
-     * These actions are performed on specified objects and include insert, remove,
+     * keywords to perform the actions.
+     * These actions are performed on specified objects and include insert,
+     * remove,
      * regionsearch, search, and dump. If the command in the file line is not
      * one of these, an appropriate message will be written in the console. This
      * processor method is called for each line in the file. Note that the
@@ -41,7 +43,8 @@ public class CommandProcessor {
      *            a single line from the text file
      */
     public void processor(String line) {
-        String[] arr = line.trim().split("\\s+"); // Use "\\s+" to split on one or more spaces
+        String[] arr = line.trim().split("\\s+"); // Use "\\s+" to split on one
+                                                  // or more spaces
         if (arr.length == 0) {
             System.out.println("Empty command line.");
             return;
@@ -51,7 +54,8 @@ public class CommandProcessor {
         try {
             switch (command) {
                 case "insert":
-                    // Ensure that there are enough arguments for the insert command
+                    // Ensure that there are enough arguments for the insert
+                    // command
                     if (arr.length == 6) {
                         String rectName = arr[1];
                         int x = Integer.parseInt(arr[2]);
@@ -59,24 +63,31 @@ public class CommandProcessor {
                         int width = Integer.parseInt(arr[4]);
                         int height = Integer.parseInt(arr[5]);
                         Rectangle rect = new Rectangle(x, y, width, height);
-                        KVPair<String, Rectangle> val = new KVPair<>(rectName, rect);
+                        KVPair<String, Rectangle> val = new KVPair<>(rectName,
+                            rect);
                         data.insert(val);
-                    } else {
-                        System.out.println("Invalid number of arguments for insert.");
+                    }
+                    else {
+                        System.out.println(
+                            "Invalid number of arguments for insert.");
                     }
                     break;
                 case "remove":
-                    // Remove by name or by coordinates based on the number of arguments
+                    // Remove by name or by coordinates based on the number of
+                    // arguments
                     if (arr.length == 2) {
                         data.remove(arr[1]);
-                    } else if (arr.length == 5) {
+                    }
+                    else if (arr.length == 5) {
                         int x = Integer.parseInt(arr[1]);
                         int y = Integer.parseInt(arr[2]);
                         int width = Integer.parseInt(arr[3]);
                         int height = Integer.parseInt(arr[4]);
                         data.remove(x, y, width, height);
-                    } else {
-                        System.out.println("Invalid number of arguments for remove.");
+                    }
+                    else {
+                        System.out.println(
+                            "Invalid number of arguments for remove.");
                     }
                     break;
                 case "regionsearch":
@@ -88,8 +99,10 @@ public class CommandProcessor {
                 case "search":
                     if (arr.length == 2) {
                         data.search(arr[1]);
-                    } else {
-                        System.out.println("Invalid number of arguments for search.");
+                    }
+                    else {
+                        System.out.println(
+                            "Invalid number of arguments for search.");
                     }
                     break;
                 case "dump":
@@ -98,11 +111,11 @@ public class CommandProcessor {
                 default:
                     System.out.println("Unrecognized command: " + command);
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Error parsing numeric value: " + e.getMessage());
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Error parsing numeric value: " + e
+                .getMessage());
         }
     }
-
-    
 
 }

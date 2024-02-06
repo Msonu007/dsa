@@ -4,7 +4,8 @@ import java.io.PrintStream;
 
 public class DatabaseTest {
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream outContent =
+        new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
     @Before
@@ -13,11 +14,13 @@ public class DatabaseTest {
         System.setOut(new PrintStream(outContent));
     }
 
+
     @After
     public void restoreStreams() {
         // Reset System.out to its original state
         System.setOut(originalOut);
     }
+
 
     @Test
     public void testSearchNoRectanglesFound() {
@@ -30,6 +33,7 @@ public class DatabaseTest {
         Assert.assertEquals(expectedOutput, outContent.toString());
     }
 
+
     public void testSearchRectanglesFound() {
         Database db = new Database();
         String name = "existentRect";
@@ -41,10 +45,12 @@ public class DatabaseTest {
         db.search(name);
 
         String expectedOutputStart = "Rectangles found\n";
-        Assert.assertTrue(outContent.toString().startsWith(expectedOutputStart));
-        //Assert.assertTrue(outContent.toString().contains("(1,1,10,10)"));
+        Assert.assertTrue(outContent.toString().startsWith(
+            expectedOutputStart));
+        // Assert.assertTrue(outContent.toString().contains("(1,1,10,10)"));
     }
-    
+
+
     public void testRemoveExistingRectangle() {
         Database db = new Database();
         Rectangle rect = new Rectangle(1, 1, 10, 10); // Rectangle to be removed
@@ -55,15 +61,18 @@ public class DatabaseTest {
         db.remove(1, 1, 10, 10); // Remove the rectangle
 
         String expectedOutputStart = "Rectangle removed";
-        Assert.assertTrue(outContent.toString().startsWith(expectedOutputStart));
+        Assert.assertTrue(outContent.toString().startsWith(
+            expectedOutputStart));
     }
+
 
     public void testRemoveNonExistingRectangle() {
         Database db = new Database();
         db.remove(1, 1, 10, 10); // Attempt to remove a non-existing rectangle
 
         String expectedOutputStart = "Rectangle not removed";
-        Assert.assertTrue(outContent.toString().startsWith(expectedOutputStart));
+        Assert.assertTrue(outContent.toString().startsWith(
+            expectedOutputStart));
     }
 
     // Additional test cases for other methods...

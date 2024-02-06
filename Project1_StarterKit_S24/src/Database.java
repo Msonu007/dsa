@@ -10,9 +10,10 @@ import java.util.Iterator;
  * Many of these methods will simply call the appropriate version of the
  * SkipList method after some preparation.
  * 
- * Also note that the Database class will have a clearer role in Project2, 
- * where we will have two data structures. The Database class will then determine 
- * which command should be directed to which data structure.  
+ * Also note that the Database class will have a clearer role in Project2,
+ * where we will have two data structures. The Database class will then
+ * determine
+ * which command should be directed to which data structure.
  * 
  * @author CS Staff
  * 
@@ -25,11 +26,11 @@ public class Database {
     // a rectangle object, these are stored in a KVPair,
     // see the KVPair class for more information
     private SkipList<String, Rectangle> list;
-    
-    //This is an Iterator object over the SkipList to loop through it from outside the class.
-    //You will need to define an extra Iterator for the intersections method.
+
+    // This is an Iterator object over the SkipList to loop through it from
+    // outside the class.
+    // You will need to define an extra Iterator for the intersections method.
     private Iterator<KVPair<String, Rectangle>> itr1;
-    
 
     /**
      * The constructor for this class initializes a SkipList object with String
@@ -54,11 +55,18 @@ public class Database {
         // writing the correct message to the console from
         // that
         Rectangle rect = pair.getValue();
-        if(! rect.isInvalid()) {
+        if (!rect.isInvalid()) {
             list.insert(pair);
-            System.out.printf("Rectangle Inserted: (%s, %d, %d, %d, %d)\n", pair.getKey().toString(),pair.getValue().getxCoordinate(),pair.getValue().getyCoordinate(),pair.getValue().getWidth(),pair.getValue().getHeight());
-        }else {
-            System.out.printf("Rectangle Rejected: (%s, %d, %d, %d, %d)\n", pair.getKey().toString(),pair.getValue().getxCoordinate(),pair.getValue().getyCoordinate(),pair.getValue().getWidth(),pair.getValue().getHeight());
+            System.out.printf("Rectangle Inserted: (%s, %d, %d, %d, %d)\n", pair
+                .getKey().toString(), pair.getValue().getxCoordinate(), pair
+                    .getValue().getyCoordinate(), pair.getValue().getWidth(),
+                pair.getValue().getHeight());
+        }
+        else {
+            System.out.printf("Rectangle Rejected: (%s, %d, %d, %d, %d)\n", pair
+                .getKey().toString(), pair.getValue().getxCoordinate(), pair
+                    .getValue().getyCoordinate(), pair.getValue().getWidth(),
+                pair.getValue().getHeight());
         }
 
     }
@@ -72,14 +80,17 @@ public class Database {
      *            the name of the rectangle to be removed
      */
     public void remove(String name) {
-        KVPair<String,Rectangle> ans;
+        KVPair<String, Rectangle> ans;
         ans = list.remove(name);
         if (ans != null) {
-            System.out.printf("Rectangle removed: (%s,%d,%d,%d,%d)\n",ans.getKey().toString(),ans.getValue().getxCoordinate(),ans.getValue().getyCoordinate(),ans.getValue().getWidth(),ans.getValue().getWidth());
-        }else {
-            System.out.printf("Rectangle not removed %s\n",name);
+            System.out.printf("Rectangle removed: (%s,%d,%d,%d,%d)\n", ans
+                .getKey().toString(), ans.getValue().getxCoordinate(), ans
+                    .getValue().getyCoordinate(), ans.getValue().getWidth(), ans
+                        .getValue().getWidth());
         }
-        
+        else {
+            System.out.printf("Rectangle not removed %s\n", name);
+        }
 
     }
 
@@ -98,15 +109,20 @@ public class Database {
      *            height of the rectangle to be removed
      */
     public void remove(int x, int y, int w, int h) {
-        KVPair<String,Rectangle> ans;
-        Rectangle rec = new Rectangle(x,y,w,h);
+        KVPair<String, Rectangle> ans;
+        Rectangle rec = new Rectangle(x, y, w, h);
         ans = list.removeByValue(rec);
         if (ans != null) {
-            System.out.printf("Rectangle removed: (%s,%d,%d,%d,%d)\n",ans.getKey().toString(),ans.getValue().getxCoordinate(),ans.getValue().getyCoordinate(),ans.getValue().getWidth(),ans.getValue().getWidth());
-        }else {
-            System.out.printf("Rectangle not removed (%d,%d,%d,%d)\n",x,y,w,h);
+            System.out.printf("Rectangle removed: (%s,%d,%d,%d,%d)\n", ans
+                .getKey().toString(), ans.getValue().getxCoordinate(), ans
+                    .getValue().getyCoordinate(), ans.getValue().getWidth(), ans
+                        .getValue().getWidth());
         }
-        
+        else {
+            System.out.printf("Rectangle not removed (%d,%d,%d,%d)\n", x, y, w,
+                h);
+        }
+
     }
 
 
@@ -126,16 +142,19 @@ public class Database {
      *            height of the region
      */
     public void regionsearch(int x, int y, int w, int h) {
-    	
+
     }
 
+
     /**
-     * Prints out all the rectangles that intersect each other. Note that 
-     * it is better not to implement an intersections method in the SkipList class
-     * as the SkipList needs to be agnostic about the fact that it is storing Rectangles. 
+     * Prints out all the rectangles that intersect each other. Note that
+     * it is better not to implement an intersections method in the SkipList
+     * class
+     * as the SkipList needs to be agnostic about the fact that it is storing
+     * Rectangles.
      */
     public void intersections() {
-    	
+
     }
 
 
@@ -147,15 +166,18 @@ public class Database {
      *            name of the Rectangle to be searched for
      */
     public void search(String name) {
-        ArrayList<KVPair<String,Rectangle>> k;
+        ArrayList<KVPair<String, Rectangle>> k;
         k = this.list.search(name);
         if (k.size() != 0) {
             System.out.println("Rectangles found");
-            for (KVPair<String,Rectangle> ele : k) {
-                System.out.printf("(%d, %d, %d, %d ) \n",ele.getValue().getxCoordinate(),ele.getValue().getyCoordinate(),ele.getValue().getWidth(),ele.getValue().getHeight());
+            for (KVPair<String, Rectangle> ele : k) {
+                System.out.printf("(%d, %d, %d, %d ) \n", ele.getValue()
+                    .getxCoordinate(), ele.getValue().getyCoordinate(), ele
+                        .getValue().getWidth(), ele.getValue().getHeight());
             }
-        }else {
-            System.out.printf("Rectangle not found: (%s) \n",name);
+        }
+        else {
+            System.out.printf("Rectangle not found: (%s) \n", name);
         }
     }
 

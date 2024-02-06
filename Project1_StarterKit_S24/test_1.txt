@@ -5,11 +5,6 @@ insert virtual_REC0 0 0 11 0
 insert inExistRec_0 1 1 -1 -2
 insert r1 10 10 5 5
 insert r2 15 15 5 5
-insert r2 15 15 5 5
-insert r2 15 15 5 5
-insert r2 15 15 5 5
-insert r2 15 15 5 5
-insert r2 15 15 5 5
 insert r3 7 7 10 10
 insert r4 20 25 7 9
 insert r2 15 15 5 5

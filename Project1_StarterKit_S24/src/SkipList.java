@@ -53,7 +53,7 @@ public class SkipList<K extends Comparable<? super K>, V>
      */
     public ArrayList<KVPair<K, V>> search(K key) {
         SkipNode l = this.head;
-        HashSet<SkipNode> pointers = new HashSet<SkipNode>() ;
+        HashSet<SkipNode> pointers = new HashSet<SkipNode>();
         ArrayList<KVPair<K, V>> sol = new ArrayList<KVPair<K, V>>();
         for (int i = l.level; i >= 0; i--) {
             l = this.head.forward[i];
@@ -81,7 +81,10 @@ public class SkipList<K extends Comparable<? super K>, V>
     public int size() {
         return size;
     }
-
+    
+    public SkipNode<KVPair<K,V> getHead() {
+        return this.head;
+    }
 
     /**
      * Inserts the KVPair in the SkipList at its appropriate spot as designated
@@ -176,19 +179,18 @@ public class SkipList<K extends Comparable<? super K>, V>
             while (true) {
                 if (l.forward[i] != null && l.forward[i].pair.getKey().equals(
                     key)) {
+
                     if (pos == null) {
                         pos = l.forward[i];
                         TempList[i] = l;
                         break;
                     }
+                    else if (l.forward[i] == pos) {
+                        TempList[i] = l;
+                        break;
+                    }
                     else {
-                        if (l.forward[i] == pos) {
-                            TempList[i] = l;
-                            break;
-                        }
-                        else {
-                            l = l.forward[i];
-                        }
+                        l = l.forward[i];
                     }
                 }
                 else if (l.forward[i] != null && key.compareTo(l.forward[i].pair
@@ -278,23 +280,23 @@ public class SkipList<K extends Comparable<? super K>, V>
         System.out.printf("Node has depth %d, Value null\n", this.head.level);
 
         // Iterate through the SkipList
-        SkipNode temp = this.head.forward[0]; // Start with the node after the header
+        SkipNode temp = this.head.forward[0]; // Start with the node after the
+                                              // header
         while (temp != null) {
             // Print node details. Special handling for Rectangle values.
             if (temp.pair.getValue() instanceof Rectangle) {
-                Rectangle tempRectangle = (Rectangle) temp.pair.getValue();
-                System.out.printf("Node has depth %d, Value (%s, %d, %d, %d, %d)\n",
-                                  temp.getLevel(),
-                                  temp.pair.getKey().toString(),
-                                  tempRectangle.getxCoordinate(),
-                                  tempRectangle.getyCoordinate(),
-                                  tempRectangle.getWidth(),
-                                  tempRectangle.getHeight());
-            } else {
+                Rectangle tempRectangle = (Rectangle)temp.pair.getValue();
+                System.out.printf(
+                    "Node has depth %d, Value (%s, %d, %d, %d, %d)\n", temp
+                        .getLevel(), temp.pair.getKey().toString(),
+                    tempRectangle.getxCoordinate(), tempRectangle
+                        .getyCoordinate(), tempRectangle.getWidth(),
+                    tempRectangle.getHeight());
+            }
+            else {
                 // Generic print format for non-Rectangle values
-                System.out.printf("Node has depth %d, Value (%s)\n",
-                                  temp.getLevel(),
-                                  temp.pair.toString());
+                System.out.printf("Node has depth %d, Value (%s)\n", temp
+                    .getLevel(), temp.pair.toString());
             }
             temp = temp.forward[0]; // Move to the next node
         }
