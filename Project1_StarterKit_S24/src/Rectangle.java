@@ -84,8 +84,29 @@ public class Rectangle {
      *            Rectangle parameter
      * @return true if the rectangle intersects with rec, false if not
      */
+    public boolean isPointInside(int x,int y) {
+        int p2 = this.xCoordinate+this.width;
+        int p3 = this.yCoordinate+this.height;
+        return (x>=this.xCoordinate && y>=this.yCoordinate && x<=p2 && y<=p3);
+    }
+    
     public boolean intersect(Rectangle r2) {
-        return false;
+        if (r2.getxCoordinate()<0 || r2.getyCoordinate() < 0) {
+            return false;
+        }
+        if (this.equals(r2)) {
+            return true;
+        }
+        if (this.xCoordinate + this.width <= r2.getxCoordinate() || r2.getxCoordinate() + r2.getWidth() <= this.xCoordinate) {
+            return false;
+        }
+
+        if (this.yCoordinate + this.height <= r2.getyCoordinate() || r2.getyCoordinate() + r2.getHeight() <= this.yCoordinate) {
+            return false;
+        } 
+
+        // If neither condition is true, rectangles intersect with an area > 0
+        return true;
 
     }
 

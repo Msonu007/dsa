@@ -91,13 +91,17 @@ public class CommandProcessor {
                     }
                     break;
                 case "regionsearch":
-                    // Implement regionsearch functionality
+                    int x = Integer.parseInt(arr[1]);
+                    int y = Integer.parseInt(arr[2]);
+                    int w = Integer.parseInt(arr[3]);
+                    int h = Integer.parseInt(arr[4]);
+                    data.regionsearch(x, y, w, h);
                     break;
                 case "intersections":
-                    // Implement intersections functionality
+                    data.intersections();
                     break;
                 case "search":
-                    if (arr.length == 2) {
+                    if (arr.length == 2) { 
                         data.search(arr[1]);
                     }
                     else {

@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertTrue;
+import org.junit.Assert;
 import student.TestCase;
 import static org.junit.Assert.assertFalse;
 
@@ -66,4 +67,119 @@ public class RectangleTest extends TestCase  {
 //        assertTrue(new8.isInvalid());
         
     }
+    public void testEqualsItself() {
+        Rectangle rect = new Rectangle(10, 10, 20, 20);
+        Assert.assertTrue(rect.equals(rect));
+    }
+
+
+    public void testEqualsAnotherRectangleWithSameDimensions() {
+        Rectangle rect1 = new Rectangle(10, 10, 20, 20);
+        Rectangle rect2 = new Rectangle(10, 10, 20, 20);
+        Assert.assertTrue(rect1.equals(rect2));
+    }
+
+
+    public void testNotEqualsNull() {
+        Rectangle rect = new Rectangle(10, 10, 20, 20);
+        Assert.assertFalse(rect.equals(null));
+    }
+
+
+    public void testNotEqualsDifferentClass() {
+        Rectangle rect = new Rectangle(10, 10, 20, 20);
+        Object otherObject = new Object();
+        Assert.assertFalse(rect.equals(otherObject));
+    }
+
+
+    public void testNotEqualsRectangleWithDifferentDimensions() {
+        Rectangle rect1 = new Rectangle(10, 10, 20, 20);
+        Rectangle rect2 = new Rectangle(10, 10, 15, 15); // Different size
+        Assert.assertFalse(rect1.equals(rect2));
+    }
+    
+    public void testisPointInside() {
+        Rectangle c = new Rectangle(10,10,20,20);
+        assertFalse(c.isPointInside(10, 8));
+        assertFalse(c.isPointInside(8, 10));
+        assertFalse(c.isPointInside(30, 40));
+        assertFalse(c.isPointInside(40, 30));
+        assertTrue(c.isPointInside(10, 15));
+        assertTrue(c.isPointInside(15, 10));
+        assertFalse(c.isPointInside(210, 10));
+        assertFalse(c.isPointInside(10, 210));
+        Rectangle c1 = new Rectangle(10,10,5,5);
+        assertTrue(c1.isPointInside(12,12));
+        assertFalse(c1.isPointInside(15, 16));
+    }
+    
+    public void testIntersect() {
+        Rectangle a = new Rectangle(10,10,10,10);
+        Rectangle b = new Rectangle(20,20,5,5);
+        Rectangle c = new Rectangle(10,10,10,10);
+        assertFalse(a.intersect(b));
+        assertTrue(a.intersect(c));
+        b = new Rectangle(-10,-10,15,10);
+        assertFalse(a.intersect(b));
+        b = new Rectangle(-10,10,15,10);
+        assertFalse(a.intersect(b));
+        b = new Rectangle(10,-10,15,10);
+        assertFalse(a.intersect(b));
+        assertTrue(a.intersect(a));
+        b = new Rectangle(-10,-10,15,10);
+        a = new Rectangle(4,-1,5,1);
+        System.out.println(b.intersect(a));
+        assertFalse(b.intersect(a));
+        Rectangle rect1 = new Rectangle(0, 0, 10, 10);
+        Rectangle rect2 = new Rectangle(20, 20, 10, 10);
+        assertFalse(rect1.intersect(rect2));
+        rect1 = new Rectangle(0, 0, 15, 15);
+        rect2 = new Rectangle(10, 10, 10, 10);
+        assertTrue(rect1.intersect(rect2));
+        rect1 = new Rectangle(0, 0, 10, 10);
+        rect2 = new Rectangle(0, 0, 10, 10);
+        assertTrue(rect1.intersect(rect2));
+        rect1 = new Rectangle(0, 0, 10, 10);
+        rect2 = new Rectangle(10, 10, 10, 10);
+        assertFalse(rect1.intersect(rect2));
+        rect1 = new Rectangle(0, 0, 10, 10);
+        rect2 = new Rectangle(10, 0, 10, 10);
+        assertFalse(rect1.intersect(rect2));
+        rect1 = new Rectangle(-10, -10, 20, 20);
+        rect2 = new Rectangle(-5, -5, 15, 15);
+        assertFalse(rect1.intersect(rect2));
+        Rectangle rect = new Rectangle(1, 1, 10, 10);
+        assertTrue(rect.intersect(rect));
+        b = new Rectangle(-10,-10,-15,10);
+        a = new Rectangle(4,-1,5,1);
+        System.out.println(b.intersect(a));
+        assertFalse(b.intersect(a));
+        b = new Rectangle(-10,-10,15,-10);
+        a = new Rectangle(-4,-1,5,1);
+        System.out.println(b.intersect(a));
+        assertFalse(b.intersect(a));
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

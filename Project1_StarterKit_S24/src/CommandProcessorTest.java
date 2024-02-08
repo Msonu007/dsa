@@ -27,5 +27,5 @@ public class CommandProcessorTest {
 
         // Reset the System.out to its original state
         System.setOut(System.out);
-    }
+    } 
 }

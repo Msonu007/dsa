@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
@@ -72,6 +73,43 @@ public class SkipList<K extends Comparable<? super K>, V>
             }
         }
         return sol;
+    }
+    
+    public ArrayList<KVPair<K,V>> regionSearch(V rec){
+        ArrayList<KVPair<K,V>> sol = new ArrayList<KVPair<K,V>>();
+        KVPair<K,V> s;
+        Iterator<KVPair<K,V>> it = this.iterator();
+        while(it.hasNext()) {
+            s = it.next();
+            if (((Rectangle) s.getValue()).intersect((Rectangle) rec)) {
+                sol.add(s);
+            }
+        }
+        return sol;
+    }
+    
+    public ArrayList<ArrayList<KVPair<K,V>>> allIntersections(){
+        ArrayList<ArrayList<KVPair<K,V>>> map_ = new ArrayList<ArrayList<KVPair<K,V>>>();
+        ArrayList<KVPair<K,V>> vals ;
+        ArrayList<KVPair<K,V>> val;
+        SkipNode temp1,temp2;
+        temp1 = this.head.forward[0];
+        while (temp1 != null) {
+            temp2 = this.head.forward[0];
+            val = new ArrayList<KVPair<K,V>>();
+            val.add(temp1.pair);
+            map_.add(val);
+            vals = new ArrayList<KVPair<K,V>>();
+            while (temp2 != null) {
+                if (temp1 != temp2 && ((Rectangle) temp2.pair.getValue()).intersect((Rectangle) temp1.pair.getValue())) {
+                    vals.add(temp2.pair);
+                }
+                temp2 = temp2.forward[0];
+            }
+            map_.add(vals);
+            temp1 = temp1.forward[0];
+        }
+        return map_;
     }
 
 
@@ -163,9 +201,19 @@ public class SkipList<K extends Comparable<? super K>, V>
         return this.head.level;
     }
     
-    public boolean isForwardValid() {
-        return this.head.forward != null;
-    }
+//    @SuppressWarnings("unchecked")
+//    public ArrayList<K> getForward() {
+//        ArrayList<K> sol = new ArrayList<K>();
+//        for (int i=0;i<this.head.forward.length;i++) {
+//            if (this.head.forward[i] == null) {
+//                sol.add((K) "null");
+//            }else {
+//                sol.add(this.head.forward[i].pair.getKey());
+//            }
+//        }
+//        return sol;
+//    }
+    
     
     public int getForwardLength() {
         return this.head.forward.length;
@@ -177,7 +225,7 @@ public class SkipList<K extends Comparable<? super K>, V>
         SkipNode[] k = this.head.forward;
         for (int i=0;i<k.length;i++) {
             if(k[i] == null) {
-                sol.add((K) "a");
+                sol.add((K) "a_");
             }else {
                 sol.add(k[i].pair.getKey());
             }
@@ -210,8 +258,11 @@ public class SkipList<K extends Comparable<? super K>, V>
                 if (l.forward[i] != null && l.forward[i].pair.getKey().equals(
                     key)) {
 
-                    if (pos == null || l.forward[i] == pos) {
+                    if (pos == null) {
                         pos = l.forward[i];
+                        TempList[i] = l;
+                        break;
+                    } else if(l.forward[i] == pos) {
                         TempList[i] = l;
                         break;
                     } else {

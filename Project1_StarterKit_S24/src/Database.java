@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 /**
@@ -57,13 +58,13 @@ public class Database {
         Rectangle rect = pair.getValue();
         if (!rect.isInvalid()) {
             list.insert(pair);
-            System.out.printf("Rectangle Inserted: (%s, %d, %d, %d, %d)\n", pair
+            System.out.printf("Rectangle inserted: (%s, %d, %d, %d, %d)\n", pair
                 .getKey().toString(), pair.getValue().getxCoordinate(), pair
                     .getValue().getyCoordinate(), pair.getValue().getWidth(),
                 pair.getValue().getHeight());
         }
         else {
-            System.out.printf("Rectangle Rejected: (%s, %d, %d, %d, %d)\n", pair
+            System.out.printf("Rectangle rejected: (%s, %d, %d, %d, %d)\n", pair
                 .getKey().toString(), pair.getValue().getxCoordinate(), pair
                     .getValue().getyCoordinate(), pair.getValue().getWidth(),
                 pair.getValue().getHeight());
@@ -83,13 +84,13 @@ public class Database {
         KVPair<String, Rectangle> ans;
         ans = list.remove(name);
         if (ans != null) {
-            System.out.printf("Rectangle removed: (%s,%d,%d,%d,%d)\n", ans
+            System.out.printf("Rectangle removed: (%s, %d, %d, %d, %d)\n", ans
                 .getKey().toString(), ans.getValue().getxCoordinate(), ans
                     .getValue().getyCoordinate(), ans.getValue().getWidth(), ans
                         .getValue().getWidth());
         }
         else {
-            System.out.printf("Rectangle not removed %s\n", name);
+            System.out.printf("Rectangle not removed: %s\n", name);
         }
 
     }
@@ -113,13 +114,13 @@ public class Database {
         Rectangle rec = new Rectangle(x, y, w, h);
         ans = list.removeByValue(rec);
         if (ans != null) {
-            System.out.printf("Rectangle removed: (%s,%d,%d,%d,%d)\n", ans
+            System.out.printf("Rectangle removed: (%s, %d, %d, %d, %d)\n", ans
                 .getKey().toString(), ans.getValue().getxCoordinate(), ans
                     .getValue().getyCoordinate(), ans.getValue().getWidth(), ans
                         .getValue().getWidth());
         }
         else {
-            System.out.printf("Rectangle not removed (%d,%d,%d,%d)\n", x, y, w,
+            System.out.printf("Rectangle rejected: (%d, %d, %d, %d)\n", x, y, w,
                 h);
         }
 
@@ -142,7 +143,30 @@ public class Database {
      *            height of the region
      */
     public void regionsearch(int x, int y, int w, int h) {
-
+        System.out.printf("Rectangle check: (%d, %d, %d, %d)\n", x, y, w,
+            h);
+        if (x >= 0 && y >= 0 && w > 0 && h > 0 && w<Integer.MAX_VALUE && h<Integer.MAX_VALUE&&x<Integer.MAX_VALUE&&y<Integer.MAX_VALUE) {
+            Rectangle ques = new Rectangle(x, y, w, h);
+            ArrayList<KVPair<String, Rectangle>> sol =
+                new ArrayList<KVPair<String, Rectangle>>();
+            sol = list.regionSearch(ques);
+            System.out.printf(
+                "Rectangles intersecting region (%d, %d, %d, %d):\n", x, y, w,
+                h);
+            if (sol.size() != 0) {
+                for (int i = 0; i < sol.size(); i++) {
+                    Rectangle rec1 = sol.get(i).getValue();
+                    System.out.printf("(%s, %d, %d, %d, %d)\n", sol.get(i)
+                        .getKey().toString(), rec1.getxCoordinate(), rec1
+                            .getyCoordinate(), rec1.getWidth(), rec1
+                                .getHeight());
+                }
+            }
+        }
+        else {
+            System.out.printf("Rectangle rejected: (%d, %d, %d, %d)\n", x, y, w,
+                h);
+        }
     }
 
 
@@ -154,6 +178,27 @@ public class Database {
      * Rectangles.
      */
     public void intersections() {
+        ArrayList<ArrayList<KVPair<String, Rectangle>>> sol = list
+            .allIntersections();
+        KVPair<String, Rectangle> k;
+        ArrayList<KVPair<String, Rectangle>> l;
+        System.out.println("Intersection pairs:");
+        for (int j = 0; j < sol.size(); j = j + 2) {
+            if (sol.get(j + 1).size() > 0) {
+                k = sol.get(j).get(0);
+                l = sol.get(j + 1);
+                for (int i = 0; i < l.size(); i++) {
+                    System.out.printf(
+                        "(%s, %d, %d, %d, %d) | (%s, %d, %d, %d, %d)\n", k
+                            .getKey().toString(), k.getValue().getxCoordinate(),
+                        k.getValue().getyCoordinate(), k.getValue().getWidth(),
+                        k.getValue().getHeight(), l.get(i).getKey().toString(),
+                        l.get(i).getValue().getxCoordinate(), l.get(i)
+                            .getValue().getyCoordinate(), l.get(i).getValue()
+                                .getWidth(), l.get(i).getValue().getHeight());
+                }
+            }
+        }
 
     }
 
@@ -169,15 +214,16 @@ public class Database {
         ArrayList<KVPair<String, Rectangle>> k;
         k = this.list.search(name);
         if (k.size() != 0) {
-            System.out.println("Rectangles found");
+            System.out.println("Rectangles found:");
             for (KVPair<String, Rectangle> ele : k) {
-                System.out.printf("(%d, %d, %d, %d ) \n", ele.getValue()
-                    .getxCoordinate(), ele.getValue().getyCoordinate(), ele
-                        .getValue().getWidth(), ele.getValue().getHeight());
+                System.out.printf("(%s, %d, %d, %d, %d)\n", ele.getKey()
+                    .toString(), ele.getValue().getxCoordinate(), ele.getValue()
+                        .getyCoordinate(), ele.getValue().getWidth(), ele
+                            .getValue().getHeight());
             }
         }
         else {
-            System.out.printf("Rectangle not found: (%s) \n", name);
+            System.out.printf("Rectangle not found: (%s)\n", name);
         }
     }
 
