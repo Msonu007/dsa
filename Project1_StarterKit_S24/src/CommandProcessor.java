@@ -105,8 +105,7 @@ public class CommandProcessor {
                         data.search(arr[1]);
                     }
                     else {
-                        System.out.println(
-                            "Invalid number of arguments for search.");
+                        System.out.println("Unrecognized command: " + line);
                     }
                     break;
                 case "dump":

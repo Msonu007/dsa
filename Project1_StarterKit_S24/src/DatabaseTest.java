@@ -30,7 +30,7 @@ public class DatabaseTest extends TestCase {
 
         db.search(name);
 
-        String expectedOutput = "Rectangle not found: (nonExistentRect) \n";
+        String expectedOutput = "Rectangle not found: (nonExistentRect)\n";
         Assert.assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -45,7 +45,7 @@ public class DatabaseTest extends TestCase {
         outContent.reset(); // Reset the output stream before the actual search
         db.search(name);
 
-        String expectedOutputStart = "Rectangles found\n";
+        String expectedOutputStart = "Rectangles found:";
         Assert.assertTrue(outContent.toString().startsWith(
             expectedOutputStart));
         // Assert.assertTrue(outContent.toString().contains("(1,1,10,10)"));

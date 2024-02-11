@@ -88,25 +88,34 @@ public class SkipList<K extends Comparable<? super K>, V>
         return sol;
     }
     
-    public ArrayList<ArrayList<KVPair<K,V>>> allIntersections(){
-        ArrayList<ArrayList<KVPair<K,V>>> map_ = new ArrayList<ArrayList<KVPair<K,V>>>();
-        ArrayList<KVPair<K,V>> vals ;
-        ArrayList<KVPair<K,V>> val;
+    public ArrayList<String> allIntersections(){
+        ArrayList<String> map_ = new ArrayList<String>();
         SkipNode temp1,temp2;
+        String s1,s2;
         temp1 = this.head.forward[0];
         while (temp1 != null) {
-            temp2 = this.head.forward[0];
-            val = new ArrayList<KVPair<K,V>>();
-            val.add(temp1.pair);
-            map_.add(val);
-            vals = new ArrayList<KVPair<K,V>>();
+            temp2 = temp1;
             while (temp2 != null) {
                 if (temp1 != temp2 && ((Rectangle) temp2.pair.getValue()).intersect((Rectangle) temp1.pair.getValue())) {
-                    vals.add(temp2.pair);
+                   KVPair<K,V> k = temp1.pair;
+                   V val = temp1.pair.getValue();
+                   KVPair <K,V> l = temp2.pair;
+                   V val1 = temp2.pair.getValue();
+                   s1 = String.format("(%s, %d, %d, %d, %d) | (%s, %d, %d, %d, %d)\n", k
+                            .getKey().toString(), ((Rectangle) val).getxCoordinate(),
+                            ((Rectangle) val).getyCoordinate(), ((Rectangle) val).getWidth(), ((Rectangle) val).getHeight(), l.getKey().toString(),
+                            ((Rectangle) val1).getxCoordinate(), ((Rectangle) val1).getyCoordinate(), ((Rectangle) val1)
+                                .getWidth(), ((Rectangle) val1).getHeight());
+                   s2 = String.format("(%s, %d, %d, %d, %d) | (%s, %d, %d, %d, %d)\n",l.getKey().toString(),
+                       ((Rectangle) val1).getxCoordinate(), ((Rectangle) val1).getyCoordinate(), ((Rectangle) val1)
+                       .getWidth(), ((Rectangle) val1).getHeight(),k
+                       .getKey().toString(), ((Rectangle) val).getxCoordinate(),
+                       ((Rectangle) val).getyCoordinate(), ((Rectangle) val).getWidth(), ((Rectangle) val).getHeight());
+                   map_.add(s1);
+                   map_.add(s2);
                 }
                 temp2 = temp2.forward[0];
             }
-            map_.add(vals);
             temp1 = temp1.forward[0];
         }
         return map_;

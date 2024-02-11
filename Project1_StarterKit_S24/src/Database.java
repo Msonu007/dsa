@@ -143,9 +143,7 @@ public class Database {
      *            height of the region
      */
     public void regionsearch(int x, int y, int w, int h) {
-        System.out.printf("Rectangle check: (%d, %d, %d, %d)\n", x, y, w,
-            h);
-        if (x >= 0 && y >= 0 && w > 0 && h > 0 && w<Integer.MAX_VALUE && h<Integer.MAX_VALUE&&x<Integer.MAX_VALUE&&y<Integer.MAX_VALUE) {
+        if (h>0 && w>0 && x+w<=Integer.MAX_VALUE && y+w<=Integer.MAX_VALUE) {
             Rectangle ques = new Rectangle(x, y, w, h);
             ArrayList<KVPair<String, Rectangle>> sol =
                 new ArrayList<KVPair<String, Rectangle>>();
@@ -178,27 +176,12 @@ public class Database {
      * Rectangles.
      */
     public void intersections() {
-        ArrayList<ArrayList<KVPair<String, Rectangle>>> sol = list
-            .allIntersections();
-        KVPair<String, Rectangle> k;
-        ArrayList<KVPair<String, Rectangle>> l;
         System.out.println("Intersection pairs:");
-        for (int j = 0; j < sol.size(); j = j + 2) {
-            if (sol.get(j + 1).size() > 0) {
-                k = sol.get(j).get(0);
-                l = sol.get(j + 1);
-                for (int i = 0; i < l.size(); i++) {
-                    System.out.printf(
-                        "(%s, %d, %d, %d, %d) | (%s, %d, %d, %d, %d)\n", k
-                            .getKey().toString(), k.getValue().getxCoordinate(),
-                        k.getValue().getyCoordinate(), k.getValue().getWidth(),
-                        k.getValue().getHeight(), l.get(i).getKey().toString(),
-                        l.get(i).getValue().getxCoordinate(), l.get(i)
-                            .getValue().getyCoordinate(), l.get(i).getValue()
-                                .getWidth(), l.get(i).getValue().getHeight());
-                }
-            }
+        ArrayList<String> sol = list.allIntersections();
+        for (int i =0;i<sol.size();i++) {
+            System.out.printf(sol.get(i));
         }
+        
 
     }
 

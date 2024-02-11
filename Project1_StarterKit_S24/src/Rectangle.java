@@ -91,9 +91,6 @@ public class Rectangle {
     }
     
     public boolean intersect(Rectangle r2) {
-        if (r2.getxCoordinate()<0 || r2.getyCoordinate() < 0) {
-            return false;
-        }
         if (this.equals(r2)) {
             return true;
         }

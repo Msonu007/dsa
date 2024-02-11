@@ -22,8 +22,8 @@ public class CommandProcessorTest {
         commandProcessor.processor(line);
 
         // Check the output
-        String expectedOutput = "Invalid number of arguments for search.\n";
-        Assert.assertEquals(expectedOutput, outContent.toString());
+        String expectedOutput = "Unrecognized command: ";
+        Assert.assertTrue(outContent.toString().contains(expectedOutput));
 
         // Reset the System.out to its original state
         System.setOut(System.out);

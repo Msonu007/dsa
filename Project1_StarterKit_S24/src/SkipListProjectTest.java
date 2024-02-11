@@ -124,7 +124,7 @@ public class SkipListProjectTest extends TestCase {
     }
 
     public void testMainWithInvalidFile() {
-        SkipListProject.main(new String[]{"non_existing_file.txt"});
+        SkipListProject.main(new String[]{"/Users/mrunaldharbathula/Desktop/cs5040/dsa/Project1_StarterKit_S24/input.txt"});
         Assert.assertTrue(outContent.toString().contains("Invalid file"));
     }
 
