@@ -95,7 +95,7 @@ public class SkipList<K extends Comparable<? super K>, V>
         temp1 = this.head.forward[0];
         while (temp1 != null) {
             temp2 = temp1;
-            while (temp2 != null) {
+            while (temp2 != null) { 
                 if (temp1 != temp2 && ((Rectangle) temp2.pair.getValue()).intersect((Rectangle) temp1.pair.getValue())) {
                    KVPair<K,V> k = temp1.pair;
                    V val = temp1.pair.getValue();
@@ -314,36 +314,31 @@ public class SkipList<K extends Comparable<? super K>, V>
         SkipNode[] TempList = (SkipNode[])Array.newInstance(
             SkipList.SkipNode.class, this.head.level + 1);
         SkipNode ele = null;
-        for (int i = this.head.level; i >= 0; i--) {
-            temp = this.head;
-            while (true) {
-                if (temp.forward[i] != null && temp.forward[i].pair.getValue()
-                    .equals(val)) {
-                    if (ele == null) {
-                        ele = temp.forward[i];
-                        TempList[i] = temp;
-                        break;
-                    }
-                    else {
-                        if (temp.forward[i].equals(ele)) {
-                            TempList[i] = temp;
-                            break;
-                        }
-                        else {
-                            temp = temp.forward[i];
-                        }
-                    }
-                }
-                else if (temp.forward[i] != null) {
-                    temp = temp.forward[i];
-                }
-                else {
-                    break;
-                }
+        
+        temp = temp.forward[0];
+        while (temp != null) {
+            if (temp.pair.getValue().equals(val)) {
+                ele = temp;
+                break;
             }
+            temp = temp.forward[0];
         }
         if (ele == null) {
             return null;
+        }
+        
+        for (int i = this.head.level; i >= 0; i--) {
+            temp = this.head;
+            while (true) {
+                if (temp.forward[i] != null && temp.forward[i].equals(ele)) {
+                   TempList[i] = temp;
+                   break;
+                  }else if (temp.forward[i] != null) {
+                    temp = temp.forward[i];
+                }else {
+                    break;
+                }
+            }
         }
         for (int i = ele.level; i >= 0; i--) {
             next = ele.forward[i];

@@ -3,3 +3,6 @@ consider even the rectangle coordinates are negative and handle them.
 
 * required to fix intersections code
 set the order for printing the variables of the code.
+
+***
+Remove by value and Remove normally, check the difference in the cmd and write accordingly
