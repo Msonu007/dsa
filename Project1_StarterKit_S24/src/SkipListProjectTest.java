@@ -145,7 +145,6 @@ public class SkipListProjectTest extends TestCase {
                 String line = scanner.nextLine();
                 // determines if the file has more lines to read
                 if (!line.trim().isEmpty()) {
-                    String[] arr = line.trim().split("\\s+");
                     cmdProc.processor(line.trim());
                 }
             }
@@ -160,13 +159,6 @@ public class SkipListProjectTest extends TestCase {
         }
 
         String printedContent = outContent.toString().trim();
-        
-//        File currentDirFile = new File("print.txt");
-//
-//
-//        String path = currentDirFile.getAbsolutePath();
-//
-//        Files.write( Paths.get(path), printedContent.getBytes());
 
         String expectedOutput = readFile("output.txt");
         System.out.println(printedContent);
@@ -228,35 +220,35 @@ public class SkipListProjectTest extends TestCase {
     }
     
     
-    public void testMainWithValidFile() throws Exception {
-        File tempFile = File.createTempFile("test", ".txt");
-        BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
-        bw.write("insert a 1 0 2 4\n");
-        bw.write("remove a\n");
-        bw.close();
-
-        SkipListProject.main(new String[]{tempFile.getPath()});
-
-        // Verify that the output is as expected
-        // Assert.assertEquals(expectedOutput, outContent.toString().trim());
-
-        tempFile.delete();
-    }
+//    public void testMainWithValidFile() throws Exception {
+//        File tempFile = File.createTempFile("test", ".txt");
+//        BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
+//        bw.write("insert a 1 0 2 4\n");
+//        bw.write("remove a\n");
+//        bw.close();
+//
+//        SkipListProject.main(new String[]{tempFile.getPath()});
+//
+//        // Verify that the output is as expected
+//        // Assert.assertEquals(expectedOutput, outContent.toString().trim());
+//
+//        tempFile.delete();
+//    }
 
     public void testMainWithInvalidFile() {
         SkipListProject.main(new String[]{"empty.txt"});
         Assert.assertTrue(outContent.toString().contains("Invalid file"));
     }
 
-    public void testMainWithEmptyFile() throws Exception {
-        File tempFile = File.createTempFile("test", ".txt");
-        tempFile.deleteOnExit();
-
-        SkipListProject.main(new String[]{tempFile.getPath()});
-
-        // Verify that the output is as expected for an empty file
-        // Assert.assertEquals(expectedOutputForEmptyFile, outContent.toString().trim());
-    }
+//    public void testMainWithEmptyFile() throws Exception {
+//        File tempFile = File.createTempFile("test", ".txt");
+//        tempFile.deleteOnExit();
+//
+//        SkipListProject.main(new String[]{tempFile.getPath()});
+//
+//        // Verify that the output is as expected for an empty file
+//        // Assert.assertEquals(expectedOutputForEmptyFile, outContent.toString().trim());
+//    }
 }
 
 

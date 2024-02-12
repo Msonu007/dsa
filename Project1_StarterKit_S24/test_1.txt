@@ -64,6 +64,7 @@ insert r13 360 968 7110 354
 insert r14 120 117 93 707
 insert r15 120 117 93 706
 remove r_r
+remove r3
 remove inExistRec
 search r4
 remove r4
@@ -106,7 +107,6 @@ remove inExistRec
 search r4
 remove r4
 remove 6 7 11 9
-remove r5
 search r14
 search r11
 search R11
@@ -130,12 +130,13 @@ insert inExist_Rec5 1 -1 0 10
 insert inExist_Rec6 12 1 7 -6
 intersections
 remove inExist_Rec1
+remove r3
 remove 12 1 7 -6
-insert r1 0 0 217 1474647
-insert r2 10 10 15 15
+insert R1 0 0 217 1474647
+insert r2 15 15 5 5
 insert R2 11 11 5 5
 insert r3 0 0 1000 10
-insert r4 0 0 10 1000
+insert r4 20 25 7 9
 regionsearch 900 5 0 0
 regionsearch 900 5 1 1
 regionsearch 5 900 0 1
@@ -148,7 +149,7 @@ insert r6 61 73 11 9
 insert r6 61 73 11 9
 regionsearch 61 73 0 0
 search r6
-insert r5 20 12 3 3
+insert r5 56 72 80 80
 insert r7 23 15 100 100
 insert r8 23 12 3 3
 insert r9 20 15 3 3

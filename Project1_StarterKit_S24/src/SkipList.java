@@ -357,7 +357,7 @@ public class SkipList<K extends Comparable<? super K>, V>
         System.out.println("SkipList dump:");
 
         // Print the header node's level
-        System.out.printf("Node has depth %d, Value null\n", this.head.level);
+        System.out.printf("Node has depth %d, Value null\n", this.head.level+1);
 
         // Iterate through the SkipList
         SkipNode temp = this.head.forward[0]; // Start with the node after the
@@ -368,7 +368,7 @@ public class SkipList<K extends Comparable<? super K>, V>
                 Rectangle tempRectangle = (Rectangle)temp.pair.getValue();
                 System.out.printf(
                     "Node has depth %d, Value (%s, %d, %d, %d, %d)\n", temp
-                        .getLevel(), temp.pair.getKey().toString(),
+                        .getLevel()+1, temp.pair.getKey().toString(),
                     tempRectangle.getxCoordinate(), tempRectangle
                         .getyCoordinate(), tempRectangle.getWidth(),
                     tempRectangle.getHeight());
