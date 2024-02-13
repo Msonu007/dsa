@@ -57,14 +57,14 @@ public class RectangleTest extends TestCase  {
         assertTrue(rec15.isInvalid());
         Rectangle rectangle = new Rectangle(10, 10, 10, 2000);
         assertTrue(rectangle.isInvalid());
-//        Rectangle new5 = new Rectangle(1,-1,-10024,3);
-//        assertTrue(new5.isInvalid());
-//        Rectangle new6 = new Rectangle(-1,-1,2,-10024);
-//        assertTrue(new6.isInvalid());
-//        Rectangle new7 = new Rectangle(1,1,1,1);
-//        assertFalse(new7.isInvalid());
-//        Rectangle new8 = new Rectangle(1,1,1024,1024);
-//        assertTrue(new8.isInvalid());
+        Rectangle new5 = new Rectangle(1,-1,-10024,3);
+        assertTrue(new5.isInvalid());
+        Rectangle new6 = new Rectangle(-1,-1,2,-10024);
+        assertTrue(new6.isInvalid());
+        Rectangle new7 = new Rectangle(1,1,1,1);
+        assertFalse(new7.isInvalid());
+        Rectangle new8 = new Rectangle(1,1,1024,1024);
+        assertTrue(new8.isInvalid());
         
     }
     public void testEqualsItself() {
@@ -146,9 +146,9 @@ public class RectangleTest extends TestCase  {
         rect1 = new Rectangle(0, 0, 10, 10);
         rect2 = new Rectangle(10, 0, 10, 10);
         assertFalse(rect1.intersect(rect2));
-        rect1 = new Rectangle(-10, -10, 20, 20);
-        rect2 = new Rectangle(-5, -5, 15, 15);
-        //assertFalse(rect1.intersect(rect2));
+        rect1 = new Rectangle(0, 0, -1, -1);
+        rect2 = new Rectangle(0,0,-1,-1);
+        assertTrue(rect1.intersect(rect2));
         Rectangle rect = new Rectangle(1, 1, 10, 10);
         assertTrue(rect.intersect(rect));
         b = new Rectangle(-10,-10,-15,10);
@@ -159,6 +159,7 @@ public class RectangleTest extends TestCase  {
         a = new Rectangle(-4,-1,5,1);
         System.out.println(b.intersect(a));
         assertFalse(b.intersect(a));
+       
     }
     
     

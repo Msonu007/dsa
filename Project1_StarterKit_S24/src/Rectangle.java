@@ -96,14 +96,14 @@ public class Rectangle {
         }
         if (this.xCoordinate + this.width <= r2.getxCoordinate() || r2.getxCoordinate() + r2.getWidth() <= this.xCoordinate) {
             return false;
+        }else if (this.yCoordinate + this.height <= r2.getyCoordinate() || r2.getyCoordinate() + r2.getHeight() <= this.yCoordinate) {
+            return false;
+        } else {
+            return true;
         }
 
-        if (this.yCoordinate + this.height <= r2.getyCoordinate() || r2.getyCoordinate() + r2.getHeight() <= this.yCoordinate) {
-            return false;
-        } 
-
         // If neither condition is true, rectangles intersect with an area > 0
-        return true;
+        
 
     }
 
@@ -148,7 +148,7 @@ public class Rectangle {
      * @return true if the rectangle has invalid parameters, false if not
      */
     public boolean isInvalid() {
-        if (this.xCoordinate >= 1024 || this.yCoordinate >= 1024) {
+        if (this.xCoordinate >= 1024 || this.yCoordinate >= 1024 || this.xCoordinate < 0 || this.yCoordinate <0 ) {
             return true;
         }
         boolean s = this.xCoordinate < 0 || this.yCoordinate < 0 || this.yCoordinate + this.height > 1024 || this.xCoordinate+ this.width > 1024 || this.height <= 0 || this.width <= 0;

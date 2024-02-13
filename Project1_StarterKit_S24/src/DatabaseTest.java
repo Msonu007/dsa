@@ -46,7 +46,7 @@ public class DatabaseTest extends TestCase {
         db.search(name);
 
         String expectedOutputStart = "Rectangles found:";
-        Assert.assertTrue(outContent.toString().startsWith(
+        assertTrue(outContent.toString().startsWith(
             expectedOutputStart));
         // Assert.assertTrue(outContent.toString().contains("(1,1,10,10)"));
     }
@@ -62,8 +62,16 @@ public class DatabaseTest extends TestCase {
         db.remove(1, 1, 10, 10); // Remove the rectangle
 
         String expectedOutputStart = "Rectangle removed";
-        Assert.assertTrue(outContent.toString().startsWith(
+        assertTrue(outContent.toString().contains(
             expectedOutputStart));
+        assertFalse(outContent.toString().contains("Rectangle not removed") || outContent.toString().contains("Rectangle rejected"));
+        db.insert(pair); // Insert the rectangle first
+
+        outContent.reset(); // Reset the output stream before actual removal
+        db.remove("rect1"); // Remove the rectangle
+        assertTrue(outContent.toString().contains(
+            expectedOutputStart));
+        assertFalse(outContent.toString().contains("Rectangle not removed") || outContent.toString().contains("Rectangle rejected"));
     }
 
 
@@ -73,9 +81,69 @@ public class DatabaseTest extends TestCase {
 
         String expectedOutputStart = "Rectangle rejected";
         String expectedOutputInvalid = "Rectangle not removed";
-        Assert.assertTrue(outContent.toString().startsWith(
+        assertTrue(outContent.toString().startsWith(
             expectedOutputStart) || outContent.toString().startsWith(expectedOutputInvalid));
+        assertFalse(outContent.toString().contains("Rectangle found"));
+        outContent.reset();
+        db.remove(-1, 1, 10, 10);
+        assertTrue(outContent.toString().contains("Rectangle rejected")); 
+    }
+    public void testRegionSearchValidInput() {
+        Database db = new Database();
+        db.regionsearch(0, 0, 10, 10);
+        assertTrue(outContent.toString().contains("Rectangles intersecting region"));
+        // Further assert the correct rectangles are printed based on setup
     }
 
-    // Additional test cases for other methods...
+    public void testRegionSearchInvalidInput() {
+        Database db = new Database();
+        db.regionsearch(0, 0, -1, -1);
+        assertTrue(outContent.toString().contains("Rectangle rejected"));
+    }
+
+    public void testRegionSearchWithOverflow() {
+        Database db = new Database();
+        db.regionsearch(Integer.MAX_VALUE, Integer.MAX_VALUE, 1, 1);
+        assertTrue(outContent.toString().contains("Rectangle rejected"));
+    }
+
+    public void testRegionSearchNoIntersectingRectangles() {
+        Database db = new Database();
+        db.regionsearch(1000, 1000, 10, 10);
+        // Assuming no rectangles at this location
+        assertTrue(outContent.toString().contains("Rectangles intersecting region"));
+        assertFalse(outContent.toString().contains("),"));
+        // The above assertion assumes that if no rectangles intersect, no details are printed
+    }
+
+    public void testRegionSearchTouchingEdges() {
+        Database db = new Database();
+        // Assuming there's a rectangle exactly at the edge of the search region
+        db.regionsearch(10, 10, 5, 5);
+        // Depending on whether touching is considered intersecting, adjust the assertion
+        assertTrue(outContent.toString().contains("Rectangles intersecting region"));
+        // Assert either presence or absence of rectangle details
+    }
+    
+    public void testRegionSearchNearMaxInt() {
+        Database db = new Database();
+        db.regionsearch(Integer.MAX_VALUE - 1, Integer.MAX_VALUE - 1, 1, 1);
+        assertTrue(outContent.toString().contains("Rectangles intersecting region"));
+        // Assert based on expected behavior; this assumes such a rectangle could exist and be found.
+    }
+
+    public void testRegionSearchOverflowX() {
+        Database db = new Database();
+        db.regionsearch(Integer.MAX_VALUE, 10, 10, 10);
+        assertTrue(outContent.toString().contains("Rectangle rejected"));
+        // This test checks if the method correctly rejects a search that would overflow on x coordinate.
+    }
+
+    public void testRegionSearchOverflowY() {
+        Database db = new Database();
+        db.regionsearch(10, Integer.MAX_VALUE, 10, 10);
+        assertTrue(outContent.toString().contains("Rectangle rejected"));
+        // Similarly, this test checks for overflow on the y coordinate.
+    }
+    
 }

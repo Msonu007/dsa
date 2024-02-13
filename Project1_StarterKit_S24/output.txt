@@ -3,6 +3,20 @@ Rectangle rejected: (rec, 7, -8, 1, 3)
 Rectangle rejected: (virtual_rec0, 1, 1, 0, 0)
 Rectangle rejected: (virtual_REC0, 0, 0, 11, 0)
 Rectangle rejected: (inExistRec_0, 1, 1, -1, -2)
+Rectangle rejected: (11, 11, 0, 0)
+Intersection pairs:
+SkipList dump:
+Node has depth 1, value null
+SkipList size is: 0
+Rectangle not found: (r_r)
+Rectangle not removed: r_r
+Rectangle rejected: (1, 1, 0, 0)
+Rectangles intersecting region (-5, -5, 20, 20):
+Rectangle rejected: (r_r, -1, -20, 3, 4)
+Rectangle rejected: (rec, 7, -8, 1, 3)
+Rectangle rejected: (virtual_rec0, 1, 1, 0, 0)
+Rectangle rejected: (virtual_REC0, 0, 0, 11, 0)
+Rectangle rejected: (inExistRec_0, 1, 1, -1, -2)
 Rectangle inserted: (r1, 10, 10, 5, 5)
 Rectangle inserted: (r2, 15, 15, 5, 5)
 Rectangle inserted: (r2, 15, 15, 5, 5)
@@ -27,9 +41,9 @@ Rectangle removed: (r2, 15, 15, 5, 5)
 Rectangle removed: (r3, 7, 7, 10, 10)
 Rectangle not removed: res
 Rectangle removed: (r1, 10, 10, 5, 5)
-Rectangle removed: (r5, 6, 7, 11, 11)
-Rectangle removed: (r4, 20, 25, 7, 7)
-Rectangle removed: (r4, 20, 25, 7, 7)
+Rectangle removed: (r5, 6, 7, 11, 9)
+Rectangle removed: (r4, 20, 25, 7, 9)
+Rectangle removed: (r4, 20, 25, 7, 9)
 Rectangle not removed: r3
 Rectangle inserted: (eq_test1, 0, 0, 1, 1)
 Rectangle inserted: (eq_test2, 1023, 1023, 1, 1)
@@ -112,8 +126,8 @@ Rectangle not removed: inExistRec
 Rectangles found:
 (r4, 20, 25, 7, 9)
 (r4, 20, 25, 7, 9)
-Rectangle removed: (r4, 20, 25, 7, 7)
-Rectangle removed: (r5, 6, 7, 11, 11)
+Rectangle removed: (r4, 20, 25, 7, 9)
+Rectangle removed: (r5, 6, 7, 11, 9)
 Rectangle not removed: r5
 Rectangles found:
 (r14, 120, 117, 93, 707)
@@ -121,11 +135,11 @@ Rectangle not found: (r11)
 Rectangle not found: (R11)
 Rectangle not removed: r10
 Rectangle not removed: r11
-Rectangle removed: (r12, 108, 136, 55, 55)
+Rectangle removed: (r12, 108, 136, 55, 103)
 Rectangle not removed: r13
-Rectangle removed: (r15, 120, 117, 93, 93)
+Rectangle removed: (r15, 120, 117, 93, 706)
 Rectangle rejected: (100, 100, 1000, 10)
-Rectangle removed: (r14, 120, 117, 93, 93)
+Rectangle removed: (r14, 120, 117, 93, 707)
 Rectangles found:
 (r2, 15, 15, 5, 5)
 (r2, 15, 15, 5, 5)
@@ -311,19 +325,19 @@ Rectangles found:
 (r4, 20, 25, 7, 9)
 (r4, 20, 25, 7, 9)
 (r4, 20, 25, 7, 9)
-Rectangle removed: (r4, 20, 25, 7, 7)
-Rectangle removed: (r5, 6, 7, 11, 11)
+Rectangle removed: (r4, 20, 25, 7, 9)
+Rectangle removed: (r5, 6, 7, 11, 9)
 Rectangles found:
 (r14, 120, 117, 93, 708)
 Rectangle not found: (r11)
 Rectangle not found: (R11)
 Rectangle not removed: r10
 Rectangle not removed: r11
-Rectangle removed: (r12, 108, 136, 55, 55)
+Rectangle removed: (r12, 108, 136, 55, 103)
 Rectangle not removed: r13
-Rectangle removed: (r15, 120, 117, 93, 93)
+Rectangle removed: (r15, 120, 117, 93, 706)
 Rectangle rejected: (100, 100, 1000, 10)
-Rectangle removed: (r14, 120, 117, 93, 93)
+Rectangle removed: (r14, 120, 117, 93, 708)
 Rectangles intersecting region (-5, -5, 20, 20):
 (r1, 10, 10, 5, 5)
 (r1, 10, 10, 5, 5)
@@ -889,10 +903,10 @@ Rectangles intersecting region (22, 14, 2, 2):
 (r8, 23, 12, 3, 3)
 (r9, 20, 15, 3, 3)
 Rectangle rejected: (22, 14, 2, 0)
-Rectangle removed: (r4, 20, 25, 7, 7)
-Rectangle removed: (r6, 61, 73, 11, 11)
+Rectangle removed: (r4, 20, 25, 7, 9)
+Rectangle removed: (r6, 61, 73, 11, 9)
 Rectangle removed: (r5, 56, 72, 80, 80)
-Rectangle removed: (r6, 61, 73, 11, 11)
+Rectangle removed: (r6, 61, 73, 11, 9)
 Rectangle removed: (r7, 23, 15, 100, 100)
 Rectangles found:
 (r2, 15, 15, 5, 5)

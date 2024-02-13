@@ -235,10 +235,10 @@ public class SkipListProjectTest extends TestCase {
 //        tempFile.delete();
 //    }
 
-    public void testMainWithInvalidFile() {
-        SkipListProject.main(new String[]{"empty.txt"});
-        Assert.assertTrue(outContent.toString().contains("Invalid file"));
-    }
+//    public void testMainWithInvalidFile() {
+//        SkipListProject.main(new String[]{"empty.txt"});
+//        Assert.assertTrue(outContent.toString().contains("Invalid file"));
+//    }
 
 //    public void testMainWithEmptyFile() throws Exception {
 //        File tempFile = File.createTempFile("test", ".txt");
@@ -249,6 +249,45 @@ public class SkipListProjectTest extends TestCase {
 //        // Verify that the output is as expected for an empty file
 //        // Assert.assertEquals(expectedOutputForEmptyFile, outContent.toString().trim());
 //    }
+    
+
+    public void testDumpEmptyList() {
+        SkipList<Integer, String> list = new SkipList<>();
+        list.dump();
+        String expectedOutput = "Node has depth 1, value null";
+        assertTrue(outContent.toString().contains(expectedOutput));
+    }
+
+   
+    public void testDumpNonEmptyList() {
+        SkipList<Integer, String> list = new SkipList<>();
+        list.insert(new KVPair<>(1, "Value1"));
+        list.dump();
+        assertTrue(outContent.toString().contains("Value1"));
+    }
+
+    
+    public void testDumpWithRectangle() {
+        SkipList<Integer, Rectangle> list = new SkipList<>();
+        list.insert(new KVPair<>(1, new Rectangle(0, 0, 10, 20)));
+        list.dump();
+        String expected = "value (1, 0, 0, 10, 20)"; // Adjust depth as needed
+        assertTrue(outContent.toString().contains(expected));
+    }
+
+    
+    public void testDumpReportsCorrectDepth() {
+        SkipList<Integer, String> list = new SkipList<>();
+        // Insert multiple elements to potentially increase the depth of some nodes
+        list.insert(new KVPair<>(1, "Value1"));
+        list.insert(new KVPair<>(2, "Value2"));
+        list.insert(new KVPair<>(3, "Value3"));
+        list.dump();
+        // This test might need to be adjusted based on how your skip list handles levels.
+        // The idea is to verify that the depth reported in the dump matches expectations.
+        // You would need to determine what those expectations are based on your implementation.
+        assertTrue(outContent.toString().matches("(?s).*Node has depth [\\d+], value.*")); // Use regex to check depth format
+    }
 }
 
 

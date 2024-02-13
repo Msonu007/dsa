@@ -288,6 +288,41 @@ public class SkipListTest extends TestCase {
         System.out.println(sol);
         assertTrue(sol.getKey().toString().equals("Value2"));
     }
+    
+    public void testIterateHeadEmptyList() {
+        SkipList<String, Integer> list = new SkipList<>();
+
+        ArrayList<String> result = list.iterateHead();
+        // Assuming the head node of an empty list has a forward array of size 1 with all nulls
+        assertEquals(1, result.size());
+        assertEquals("a_", result.get(0));
+    }
+
+    public void testIterateHeadNonEmptyList() {
+        SkipList<String, Integer> list = new SkipList<>();
+        list.insert(new KVPair<>("Key1", 100));
+        ArrayList<String> result = list.iterateHead();
+        // Validate that the first key is correctly retrieved and the rest are "a_"
+        assertTrue(result.contains("Key1"));
+        // Further checks depend on the specific implementation of your SkipList
+        // For example, if inserting one element only populates the lowest level,
+        // the rest of the levels should still contain "a_"
+    }
+
+    public void testIterateHeadWithMultipleLevels() {
+        SkipList<String, Integer> list = new SkipList<>();
+        // Insert enough elements to ensure multiple levels are created
+        list.insert(new KVPair<>("Key1", 100));
+        list.insert(new KVPair<>("Key2", 200));
+        // You might need to insert more elements or manipulate levels directly if possible
+
+        ArrayList<String> result = list.iterateHead();
+        // Check that the array contains the expected keys and "a_" placeholders
+        assertTrue(result.contains("Key1") || result.contains("Key2"));
+        
+        // The exact assertions will depend on how your skip list implements level promotion
+        // and how the `iterateHead` method is supposed to behave.
+    }
 
     
     
