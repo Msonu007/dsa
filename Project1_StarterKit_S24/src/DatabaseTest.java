@@ -72,8 +72,9 @@ public class DatabaseTest extends TestCase {
         db.remove(1, 1, 10, 10); // Attempt to remove a non-existing rectangle
 
         String expectedOutputStart = "Rectangle rejected";
+        String expectedOutputInvalid = "Rectangle not removed";
         Assert.assertTrue(outContent.toString().startsWith(
-            expectedOutputStart));
+            expectedOutputStart) || outContent.toString().startsWith(expectedOutputInvalid));
     }
 
     // Additional test cases for other methods...

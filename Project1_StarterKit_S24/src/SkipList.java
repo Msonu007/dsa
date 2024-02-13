@@ -357,7 +357,7 @@ public class SkipList<K extends Comparable<? super K>, V>
         System.out.println("SkipList dump:");
 
         // Print the header node's level
-        System.out.printf("Node has depth %d, Value null\n", this.head.level+1);
+        System.out.printf("Node has depth %d, value null\n", this.head.level+1);
 
         // Iterate through the SkipList
         SkipNode temp = this.head.forward[0]; // Start with the node after the

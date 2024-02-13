@@ -112,6 +112,10 @@ public class Database {
     public void remove(int x, int y, int w, int h) {
         KVPair<String, Rectangle> ans;
         Rectangle rec = new Rectangle(x, y, w, h);
+        if (rec.isInvalid()) {
+            System.out.printf("Rectangle rejected: (%d, %d, %d, %d)\n", x, y, w,h);
+            return;
+        }
         ans = list.removeByValue(rec);
         if (ans != null) {
             System.out.printf("Rectangle removed: (%s, %d, %d, %d, %d)\n", ans
@@ -120,7 +124,7 @@ public class Database {
                         .getValue().getWidth());
         }
         else {
-            System.out.printf("Rectangle rejected: (%d, %d, %d, %d)\n", x, y, w,
+            System.out.printf("Rectangle not removed: (%d, %d, %d, %d)\n", x, y, w,
                 h);
         }
 
@@ -177,6 +181,9 @@ public class Database {
      */
     public void intersections() {
         System.out.println("Intersection pairs:");
+        if (list.size() < 2) {
+            return;
+        }
         ArrayList<String> sol = list.allIntersections();
         for (int i =0;i<sol.size();i++) {
             System.out.printf(sol.get(i));
