@@ -41,23 +41,22 @@ public class SkipListProject {
      *            argument.
      */
     public static void main(String[] args) {
-        
-    	// the file containing the commands
+
+        // the file containing the commands
         File file = null;
-        
 
         // Attempts to open the file and scan through it
         try {
-        	
-        	// takes the first command line argument and opens that file
+
+            // takes the first command line argument and opens that file
             file = new File(args[0]);
-            
+
             // creates a scanner object
             Scanner scanner = new Scanner(file);
-            
+
             // creates a command processor object
             CommandProcessor cmdProc = new CommandProcessor();
-            
+
             // reads the entire file and processes the commands
             // line by line
             while (scanner.hasNextLine()) {
@@ -76,5 +75,5 @@ public class SkipListProject {
             System.out.println("Invalid file");
             e.printStackTrace();
         }
-        }
+    }
 }
