@@ -78,32 +78,64 @@ public class Rectangle {
 
 
     /**
-     * Checks if the invoking rectangle intersects with rec.
+     * Determines if a given point specified by (x, y) coordinates is inside the
+     * bounds of this object.
+     * This method calculates whether the point lies within the rectangular area
+     * defined by the object's
+     * top-left corner (xCoordinate, yCoordinate) and dimensions (width,
+     * height).
+     * 
+     * @param x
+     *            The x-coordinate of the point to check.
+     * @param y
+     *            The y-coordinate of the point to check.
+     * @return {@code true} if the point is inside the bounds of the rectangle;
+     *         {@code false} otherwise.
+     * @author Mrunaldhar Bathula
+     */
+    public boolean isPointInside(int x, int y) {
+        int p2 = this.xCoordinate + this.width;
+        int p3 = this.yCoordinate + this.height;
+        return (x >= this.xCoordinate && y >= this.yCoordinate && x <= p2
+            && y <= p3);
+    }
+
+
+    /**
+     * Determines if this rectangle intersects with another rectangle
+     * {@code r2}.
+     * The method checks if there is any overlap between the two rectangles by
+     * comparing their coordinates and dimensions.
+     * It considers the rectangles to intersect if they share any common area,
+     * including edge or corner touching.
+     * <p>
+     * The intersection logic takes into account the position and size of both
+     * rectangles, returning {@code true} if they intersect,
+     * and {@code false} otherwise. It also treats two identical rectangles (in
+     * terms of position and size) as intersecting.
      * 
      * @param r2
-     *            Rectangle parameter
-     * @return true if the rectangle intersects with rec, false if not
+     *            The {@code Rectangle} to check for intersection with this
+     *            rectangle.
+     * @return {@code boolean} - {@code true} if the rectangles intersect,
+     *         {@code false} otherwise.
+     * @author Mrunaldhar Bathula
      */
-    public boolean isPointInside(int x,int y) {
-        int p2 = this.xCoordinate+this.width;
-        int p3 = this.yCoordinate+this.height;
-        return (x>=this.xCoordinate && y>=this.yCoordinate && x<=p2 && y<=p3);
-    }
-    
     public boolean intersect(Rectangle r2) {
         if (this.equals(r2)) {
             return true;
         }
-        if (this.xCoordinate + this.width <= r2.getxCoordinate() || r2.getxCoordinate() + r2.getWidth() <= this.xCoordinate) {
+        if (this.xCoordinate + this.width <= r2.getxCoordinate() || r2
+            .getxCoordinate() + r2.getWidth() <= this.xCoordinate) {
             return false;
-        }else if (this.yCoordinate + this.height <= r2.getyCoordinate() || r2.getyCoordinate() + r2.getHeight() <= this.yCoordinate) {
+        }
+        else if (this.yCoordinate + this.height <= r2.getyCoordinate() || r2
+            .getyCoordinate() + r2.getHeight() <= this.yCoordinate) {
             return false;
-        } else {
+        }
+        else {
             return true;
         }
-
-        // If neither condition is true, rectangles intersect with an area > 0
-        
 
     }
 
@@ -148,10 +180,13 @@ public class Rectangle {
      * @return true if the rectangle has invalid parameters, false if not
      */
     public boolean isInvalid() {
-        if (this.xCoordinate >= 1024 || this.yCoordinate >= 1024 || this.xCoordinate < 0 || this.yCoordinate <0 ) {
+        if (this.xCoordinate >= 1024 || this.yCoordinate >= 1024
+            || this.xCoordinate < 0 || this.yCoordinate < 0) {
             return true;
         }
-        boolean s = this.xCoordinate < 0 || this.yCoordinate < 0 || this.yCoordinate + this.height > 1024 || this.xCoordinate+ this.width > 1024 || this.height <= 0 || this.width <= 0;
+        boolean s = this.xCoordinate < 0 || this.yCoordinate < 0
+            || this.yCoordinate + this.height > 1024 || this.xCoordinate
+                + this.width > 1024 || this.height <= 0 || this.width <= 0;
         return s;
     }
 }

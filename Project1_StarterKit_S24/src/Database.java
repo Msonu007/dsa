@@ -84,11 +84,10 @@ public class Database {
         KVPair<String, Rectangle> ans;
         ans = list.remove(name);
         if (ans != null) {
-            System.out.println("Rectangle removed: " + "(" + ans
-                .getKey() + ", " + ans.getValue().getxCoordinate()
-                + ", " + ans.getValue().getyCoordinate() + ", "
-                + ans.getValue().getWidth() + ", " + ans
-                    .getValue().getHeight() + ")");
+            System.out.println("Rectangle removed: " + "(" + ans.getKey() + ", "
+                + ans.getValue().getxCoordinate() + ", " + ans.getValue()
+                    .getyCoordinate() + ", " + ans.getValue().getWidth() + ", "
+                + ans.getValue().getHeight() + ")");
         }
         else {
             System.out.println("Rectangle not removed: " + name);
@@ -114,7 +113,8 @@ public class Database {
         KVPair<String, Rectangle> ans;
         Rectangle rec = new Rectangle(x, y, w, h);
         if (rec.isInvalid()) {
-            System.out.printf("Rectangle rejected: (%d, %d, %d, %d)\n", x, y, w,h);
+            System.out.printf("Rectangle rejected: (%d, %d, %d, %d)\n", x, y, w,
+                h);
             return;
         }
         ans = list.removeByValue(rec);
@@ -125,8 +125,8 @@ public class Database {
                         .getValue().getHeight());
         }
         else {
-            System.out.printf("Rectangle not removed: (%d, %d, %d, %d)\n", x, y, w,
-                h);
+            System.out.printf("Rectangle not removed: (%d, %d, %d, %d)\n", x, y,
+                w, h);
         }
 
     }
@@ -150,7 +150,8 @@ public class Database {
     public void regionsearch(int x, int y, int w, int h) {
         long lx = x;
         long ly = y;
-        if (h>0 && w>0 && lx+w<=Integer.MAX_VALUE && ly+w<=Integer.MAX_VALUE) {
+        if (h > 0 && w > 0 && lx + w <= Integer.MAX_VALUE && ly
+            + w <= Integer.MAX_VALUE) {
             Rectangle ques = new Rectangle(x, y, w, h);
             ArrayList<KVPair<String, Rectangle>> sol =
                 new ArrayList<KVPair<String, Rectangle>>();
@@ -185,10 +186,9 @@ public class Database {
     public void intersections() {
         System.out.println("Intersection pairs:");
         ArrayList<String> sol = list.allIntersections();
-        for (int i =0;i<sol.size();i++) {
+        for (int i = 0; i < sol.size(); i++) {
             System.out.printf(sol.get(i));
         }
-        
 
     }
 

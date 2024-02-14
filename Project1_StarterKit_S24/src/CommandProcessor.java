@@ -18,9 +18,6 @@ public class CommandProcessor {
      * The constructor for the command processor requires a database instance to
      * exist, so the only constructor takes a database class object to feed
      * commands to.
-     * 
-     * @param dataIn
-     *            the database object to manipulate
      */
     public CommandProcessor() {
         data = new Database();
@@ -101,7 +98,7 @@ public class CommandProcessor {
                     data.intersections();
                     break;
                 case "search":
-                    if (arr.length == 2) { 
+                    if (arr.length == 2) {
                         data.search(arr[1]);
                     }
                     else {
